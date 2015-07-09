@@ -1,24 +1,30 @@
 /*globals document*/
 
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
+import mui from 'material-ui';
+
 import Nav from './Nav';
 import Home from './Home';
 import About from './About';
+import Page from './Page';
+
 import ApplicationStore from '../stores/ApplicationStore';
+
 import provideContext from 'fluxible/addons/provideContext';
 import connectToStores from 'fluxible/addons/connectToStores';
 import { handleHistory } from 'fluxible-router';
 
-class Application extends React.Component {
-    render() {
-        var Handler = this.props.currentRoute.get('handler');
+var { AppCanvas, AppBar, Styles } = mui;
+var { ThemeManager, Colors } = Styles;
 
-        return (
-            <div>
-                <Nav selected={this.props.currentPageName} links={this.props.pages} />
-                <Handler />
-            </div>
-        );
+
+class Application extends Component {
+    getChildContext() {
+        var tm = new ThemeManager();
+
+        return {
+            muiTheme: tm.getCurrentTheme()
+        };
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -28,17 +34,33 @@ class Application extends React.Component {
         }
         document.title = newProps.pageTitle;
     }
+
+    render() {
+        var Handler = this.props.currentRoute.get('handler');
+        var store = this.props.context.getStore(ApplicationStore);
+
+        return (
+            <AppCanvas>
+                <AppBar title={this.props.applicationName}></AppBar>
+                <Page handler={Handler}></Page>
+            </AppCanvas>
+        );
+    }
+
 }
 
-export default handleHistory(provideContext(connectToStores(
-    Application,
-    [ApplicationStore],
-    function (stores, props) {
-        var appStore = stores.ApplicationStore;
-        return {
-            currentPageName: appStore.getCurrentPageName(),
-            pageTitle: appStore.getPageTitle(),
-            pages: appStore.getPages()
-        };
-    }
-)));
+Application.childContextTypes = {
+    muiTheme: PropTypes.object
+};
+
+Application = connectToStores(Application, [ApplicationStore], function (stores, props) {
+    var appStore = stores.ApplicationStore;
+    return {
+        currentPageName: appStore.getCurrentPageName(),
+        pageTitle: appStore.getPageTitle(),
+        pages: appStore.getPages(),
+        applicationName: appStore.getApplicationName()
+    };
+});
+Application = provideContext(Application);
+export default handleHistory(Application);
