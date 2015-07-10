@@ -3,10 +3,8 @@
 import React, { PropTypes, Component } from 'react';
 import mui from 'material-ui';
 
-import Nav from './Nav';
-import Home from './Home';
-import About from './About';
 import Page from './Page';
+import Home from './Home';
 
 import ApplicationStore from '../stores/ApplicationStore';
 
@@ -37,7 +35,6 @@ class Application extends Component {
 
     render() {
         var Handler = this.props.currentRoute.get('handler');
-        var store = this.props.context.getStore(ApplicationStore);
 
         return (
             <AppCanvas>
