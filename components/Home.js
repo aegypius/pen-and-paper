@@ -21,10 +21,10 @@ class Home extends Component {
     }
 
     render() {
-        var characters = [];
-        for (var character in this.props.characters) {
-            characters.push(<CharacterCard key={character} character={this.props.characters[character]}/>);
-        }
+        var characters = this.props.characters.map((character) => {
+            return <CharacterCard key={character.id} character={character}/>;
+        }, this);
+
         return (
             <div>
                 <div id="character-list">{characters}</div>

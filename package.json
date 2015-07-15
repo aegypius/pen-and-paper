@@ -18,7 +18,6 @@
     "debug": "^2.0.0",
     "express": "^4.3.2",
     "express-state": "^1.2.0",
-    "fetchr": "^0.5.12",
     "fluxible": "^0.5.0",
     "fluxible-addons-react": "^0.1.6",
     "fluxible-plugin-fetchr": "^0.3.4",

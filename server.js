@@ -16,7 +16,6 @@ import React from 'react';
 import app from './app';
 import HtmlComponent from './components/Html';
 import { createElementWithContext } from 'fluxible-addons-react';
-import Fetchr from 'fetchr';
 const htmlComponent = React.createFactory(HtmlComponent);
 const env = process.env.NODE_ENV;
 
