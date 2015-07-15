@@ -10,12 +10,12 @@ class CharacterCard extends Component {
 
     getStyles() {
         return {
-            marginBottom: '10px'
+            marginBottom: '5px'
         };
     }
 
     render() {
-        let initial = this.props.character.name.substr(0, 1).toUpperCase();
+        let initial = this.props.character.player.substr(0, 1).toUpperCase();
         let backgroundColor = Colors.grey400;
         let color = Colors.white;
 

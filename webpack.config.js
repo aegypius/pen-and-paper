@@ -1,12 +1,13 @@
 var webpack = require('webpack');
 var path = require('path');
+var port = parseInt(process.env.PORT || 3000, 10) + 1;
 
 var webpackConfig = {
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
     entry: [
-        'webpack-dev-server/client?http://localhost:3000',
+        'webpack-dev-server/client?http://localhost:' + port,
         'webpack/hot/only-dev-server',
         './client.js'
     ],

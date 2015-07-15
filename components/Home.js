@@ -34,10 +34,10 @@ class Home extends Component {
     }
 }
 
-Home = connectToStores(Home, [CharacterStore], function (stores, props) {
-    var charStore = stores.CharacterStore;
+Home = connectToStores(Home, [CharacterStore], function (context, props) {
+    var charStore = context.getStore(CharacterStore);
     return {
-        characters: charStore.getCharacters()
+        characters: charStore.getAll()
     };
 });
 // Home = provideContext(Home);

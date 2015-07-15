@@ -7,6 +7,7 @@
 
 import express from 'express';
 import compression from 'compression';
+import bodyParser from 'body-parser';
 import path from 'path';
 import serialize from 'serialize-javascript';
 import {navigateAction} from 'fluxible-router';
@@ -15,6 +16,7 @@ import React from 'react';
 import app from './app';
 import HtmlComponent from './components/Html';
 import { createElementWithContext } from 'fluxible-addons-react';
+import Fetchr from 'fetchr';
 const htmlComponent = React.createFactory(HtmlComponent);
 const env = process.env.NODE_ENV;
 
@@ -23,6 +25,17 @@ const debug = debugLib('pen-and-paper');
 const server = express();
 server.use('/public', express.static(path.join(__dirname, '/build')));
 server.use(compression());
+server.use(bodyParser.json());
+
+// Setup fetchr
+var fetchrPlugin = app.getPlugin('FetchrPlugin');
+
+// Register services
+import CharacterService from './services/Character';
+
+fetchrPlugin.registerService(CharacterService);
+
+server.use(fetchrPlugin.getXhrPath(), fetchrPlugin.getMiddleware());
 
 server.use((req, res, next) => {
     let context = app.createContext();

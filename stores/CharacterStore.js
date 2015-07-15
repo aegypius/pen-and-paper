@@ -4,41 +4,15 @@ class CharacterStore extends BaseStore {
 
     constructor(dispatcher) {
         super(dispatcher);
-        this.characters = [
-            {
-                name: 'Voldhaü',
-                class: 'Chasseur',
-                player: 'Nicolas LAURENT'
-            },
-            {
-                name: 'Expiation',
-                class: 'Chaman',
-                player: 'Loïc BILLARD'
-            },
-            {
-                name: 'Expiation',
-                class: 'Chaman',
-                player: 'Loïc BILLARD'
-            },
-            {
-                name: 'Expiation',
-                class: 'Chaman',
-                player: 'Loïc BILLARD'
-            },
-            {
-                name: 'Expiation',
-                class: 'Chaman',
-                player: 'Loïc BILLARD'
-            },
-            {
-                name: 'Expiation',
-                class: 'Chaman',
-                player: 'Loïc BILLARD'
-            }
-        ];
+        this.characters = [];
     }
 
-    getCharacters() {
+    _receiveCharacters(characters) {
+        this.characters = characters;
+        this.emitChange();
+    }
+
+    getAll() {
         return this.characters;
     }
 
@@ -54,4 +28,8 @@ class CharacterStore extends BaseStore {
 }
 
 CharacterStore.storeName = 'CharacterStore';
+CharacterStore.handlers = {
+    'RECEIVE_CHARACTERS_SUCCESS': '_receiveCharacters'
+};
+
 export default CharacterStore;

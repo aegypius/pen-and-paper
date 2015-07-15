@@ -10,7 +10,7 @@ class Page extends Component {
 
     getStyles() {
         return {
-            padding: '70px 12px 12px',
+            padding: '70px 6px 6px',
             fontFamily: 'Roboto, sans-serif',
             fontSize: '12px'
         };

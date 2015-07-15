@@ -48,8 +48,8 @@ Application.childContextTypes = {
     muiTheme: PropTypes.object
 };
 
-Application = connectToStores(Application, [ApplicationStore], function (stores, props) {
-    var appStore = stores.ApplicationStore;
+Application = connectToStores(Application, [ApplicationStore], function (context, props) {
+    var appStore = context.getStore(ApplicationStore);
     return {
         currentPageName: appStore.getCurrentPageName(),
         pageTitle: appStore.getPageTitle(),
