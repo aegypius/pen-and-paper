@@ -7,9 +7,7 @@ import Page from './Page';
 import Home from './Home';
 
 import ApplicationStore from '../stores/ApplicationStore';
-
-import provideContext from 'fluxible/addons/provideContext';
-import connectToStores from 'fluxible/addons/connectToStores';
+import { connectToStores, provideContext } from 'fluxible-addons-react';
 import { handleHistory } from 'fluxible-router';
 
 var { AppCanvas, AppBar, Styles } = mui;

@@ -1,6 +1,5 @@
-'use strict';
-var React = require('react');
-var ApplicationStore = require('../stores/ApplicationStore');
+import React from 'react';
+import ApplicationStore from '../stores/ApplicationStore';
 
 class Html extends React.Component {
 
@@ -24,10 +23,10 @@ class Html extends React.Component {
                 <div id="app" dangerouslySetInnerHTML={{__html: this.props.markup}}></div>
             </body>
             <script dangerouslySetInnerHTML={{__html: this.props.state}}></script>
-            <script src="/public/js/main.js"></script>
+            <script src={'/public/js/' + this.props.clientFile}></script>
             </html>
         );
     }
 }
 
-module.exports = Html;
+export default Html;

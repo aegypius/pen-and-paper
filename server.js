@@ -6,6 +6,7 @@
  */
 
 import express from 'express';
+import compression from 'compression';
 import path from 'path';
 import serialize from 'serialize-javascript';
 import {navigateAction} from 'fluxible-router';
@@ -13,13 +14,15 @@ import debugLib from 'debug';
 import React from 'react';
 import app from './app';
 import HtmlComponent from './components/Html';
+import { createElementWithContext } from 'fluxible-addons-react';
 const htmlComponent = React.createFactory(HtmlComponent);
+const env = process.env.NODE_ENV;
 
 const debug = debugLib('pen-and-paper');
 
 const server = express();
-server.set('state namespace', 'App');
 server.use('/public', express.static(path.join(__dirname, '/build')));
+server.use(compression());
 
 server.use((req, res, next) => {
     let context = app.createContext();
@@ -42,9 +45,10 @@ server.use((req, res, next) => {
 
         debug('Rendering Application component into html');
         const html = React.renderToStaticMarkup(htmlComponent({
+            clientFile: env === 'production' ? 'main.min.js' : 'main.js',
             context: context.getComponentContext(),
             state: exposed,
-            markup: React.renderToString(context.createElement())
+            markup: React.renderToString(createElementWithContext(context))
         }));
 
         debug('Sending markup');
@@ -56,6 +60,6 @@ server.use((req, res, next) => {
 
 const port = process.env.PORT || 3000;
 server.listen(port);
-console.log('Listening on port ' + port);
+console.log('Application listening on port ' + port);
 
 export default server;

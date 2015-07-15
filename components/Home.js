@@ -1,6 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import provideContext from 'fluxible/addons/provideContext';
-import connectToStores from 'fluxible/addons/connectToStores';
+import { connectToStores, provideContext } from 'fluxible-addons-react';
 
 import CharacterCard from './CharacterCard';
 import CharacterStore from '../stores/CharacterStore';
