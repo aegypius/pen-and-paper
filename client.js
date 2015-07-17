@@ -3,6 +3,7 @@
 import React from 'react';
 import debug from 'debug';
 import { createElementWithContext } from 'fluxible-addons-react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import app from './app';
 
 const debugClient = debug('pen-and-paper');
@@ -23,6 +24,8 @@ app.rehydrate(dehydratedState, (err, context) => {
     }
     window.context = context;
     const mountNode = document.getElementById('app');
+
+    injectTapEventPlugin();
 
     debugClient('React Rendering');
     React.render(
