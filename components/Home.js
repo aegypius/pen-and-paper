@@ -2,14 +2,17 @@ import React, {Component, PropTypes} from 'react';
 import { connectToStores, provideContext } from 'fluxible-addons-react';
 
 import CharacterCard from './CharacterCard';
+import ApplicationStore from '../stores/ApplicationStore';
 import CharacterStore from '../stores/CharacterStore';
-import { FloatingActionButton, IconButton, Styles } from 'material-ui';
+import { AppBar, FloatingActionButton, IconButton, Styles } from 'material-ui';
+import showCharacters from '../actions/showCharacters';
 
 let Colors = Styles.Colors;
 
 class Home extends Component {
-    propTypes: {
-        characters: PropTypes.array
+
+    contextTypes: {
+        executeAction: PropTypes.func.isRequired
     }
 
     getStyles() {
@@ -20,6 +23,14 @@ class Home extends Component {
         };
     }
 
+    componentDidMount() {
+        this.props.context.executeAction(showCharacters, {});
+    }
+
+    onRefresh() {
+        this.props.context.executeAction(showCharacters, {});
+    }
+
     render() {
         var characters = this.props.characters.map((character) => {
             return <CharacterCard key={character.id} character={character}/>;
@@ -27,6 +38,7 @@ class Home extends Component {
 
         return (
             <div>
+                <AppBar showMenuIconButton={false} title={this.props.title}></AppBar>
                 <div id="character-list">{characters}</div>
                 <FloatingActionButton mini={false} style={this.getStyles()}>+</FloatingActionButton>
             </div>
@@ -35,10 +47,12 @@ class Home extends Component {
 }
 
 Home = connectToStores(Home, [CharacterStore], function (context, props) {
+    var appStore = context.getStore(ApplicationStore);
     var charStore = context.getStore(CharacterStore);
+
     return {
+        title: appStore.getApplicationName(),
         characters: charStore.getAll()
     };
 });
-// Home = provideContext(Home);
-export default Home;
+export default provideContext(Home);

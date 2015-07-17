@@ -3,23 +3,28 @@
 import React, { PropTypes, Component } from 'react';
 import mui from 'material-ui';
 
-import Page from './Page';
-import Home from './Home';
-
 import ApplicationStore from '../stores/ApplicationStore';
 import { connectToStores, provideContext } from 'fluxible-addons-react';
 import { handleHistory } from 'fluxible-router';
 
-var { AppCanvas, AppBar, Styles } = mui;
+var { AppCanvas, Styles } = mui;
 var { ThemeManager, Colors } = Styles;
 
 
 class Application extends Component {
+
     getChildContext() {
         var tm = new ThemeManager();
 
         return {
             muiTheme: tm.getCurrentTheme()
+        };
+    }
+
+    getStyles() {
+        return {
+            fontFamily: 'Roboto, sans-serif',
+            fontSize: '12px'
         };
     }
 
@@ -35,10 +40,11 @@ class Application extends Component {
         var Handler = this.props.currentRoute.get('handler');
 
         return (
-            <AppCanvas>
-                <AppBar title={this.props.applicationName}></AppBar>
-                <Page handler={Handler}></Page>
-            </AppCanvas>
+            <div style={this.getStyles()}>
+                <AppCanvas>
+                    <Handler context={this.props.context}/>
+                </AppCanvas>
+            </div>
         );
     }
 
