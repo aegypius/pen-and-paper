@@ -17,9 +17,14 @@ class Home extends Component {
 
     getStyles() {
         return {
-            position: 'fixed',
-            right: '12px',
-            bottom: '12px'
+            listStyles: {
+                padding: '6px'
+            },
+            floatingButtonStyles: {
+                position: 'fixed',
+                right: '12px',
+                bottom: '12px'
+            }
         };
     }
 
@@ -36,11 +41,13 @@ class Home extends Component {
             return <CharacterCard key={character.id} character={character}/>;
         }, this);
 
+        let { listStyles, floatingButtonStyles } = this.getStyles();
+
         return (
             <div>
                 <AppBar showMenuIconButton={false} title={this.props.title}></AppBar>
-                <div id="character-list">{characters}</div>
-                <FloatingActionButton mini={false} style={this.getStyles()}>+</FloatingActionButton>
+                <div style={listStyles}>{characters}</div>
+                <FloatingActionButton mini={false} style={floatingButtonStyles}>+</FloatingActionButton>
             </div>
         );
     }
