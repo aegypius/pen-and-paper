@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import { connectToStores, provideContext } from 'fluxible-addons-react';
 
 import CharacterCard from './CharacterCard';
+import ListItem from './ListItem';
 import ApplicationStore from '../stores/ApplicationStore';
 import CharacterStore from '../stores/CharacterStore';
 import { AppBar, FloatingActionButton, IconButton, Styles } from 'material-ui';
@@ -37,16 +38,15 @@ class Home extends Component {
     }
 
     render() {
-        var characters = this.props.characters.map((character) => {
-            return <CharacterCard key={character.id} character={character}/>;
-        }, this);
-
+        let { characters } = this.props;
         let { listStyles, floatingButtonStyles } = this.getStyles();
 
         return (
             <div>
                 <AppBar showMenuIconButton={false} title={this.props.title}></AppBar>
-                <div style={listStyles}>{characters}</div>
+                <ListItem style={listStyles} items={characters.map(
+                    (character) => <CharacterCard key={character.id} character={character}/>
+                )}></ListItem>
                 <FloatingActionButton mini={false} style={floatingButtonStyles}>+</FloatingActionButton>
             </div>
         );

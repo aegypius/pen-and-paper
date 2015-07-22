@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardHeader, Avatar, Styles } from 'material-ui';
+
 let Colors = Styles.Colors;
 
 class CharacterCard extends Component {
@@ -26,7 +27,9 @@ class CharacterCard extends Component {
         let avatar = (<Avatar color={color} backgroundColor={backgroundColor}>{initial}</Avatar>);
         return (
             <Card style={this.getStyles()}>
-                <CardHeader title={this.props.character.name} subtitle={'Classe: ' + this.props.character.class} avatar={avatar}/>
+                <CardHeader title={this.props.character.name} subtitle={this.props.character.classes.map(
+                    (characterClass) => characterClass.name + ' (lvl ' + characterClass.level + ')'
+                ).join(', ')} avatar={avatar}/>
             </Card>
         );
     }
