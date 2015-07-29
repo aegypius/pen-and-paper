@@ -16,7 +16,8 @@ class CharacterCard extends Component {
     }
 
     render() {
-        let initial = this.props.character.player.substr(0, 1).toUpperCase();
+        let { character } = this.props;
+        let initial = character.name.substr(0, 1).toUpperCase();
         let backgroundColor = Colors.grey400;
         let color = Colors.white;
 
@@ -24,12 +25,17 @@ class CharacterCard extends Component {
             default:
                 backgroundColor = Colors.deepOrange500;
         }
+
         let avatar = (<Avatar color={color} backgroundColor={backgroundColor}>{initial}</Avatar>);
+        let classes = character.classes
+            .sort((a, b) => a.level > b.level ? -1 : 1 )
+            .map((c) => c.name + ' (' + c.level + ')')
+            .join(' / ')
+        ;
+
         return (
             <Card style={this.getStyles()}>
-                <CardHeader title={this.props.character.name} subtitle={this.props.character.classes.map(
-                    (characterClass) => characterClass.name + ' (lvl ' + characterClass.level + ')'
-                ).join(', ')} avatar={avatar}/>
+                <CardHeader title={character.name} subtitle={classes} avatar={avatar} />
             </Card>
         );
     }

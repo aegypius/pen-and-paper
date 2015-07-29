@@ -2,6 +2,11 @@ import BaseStore from 'fluxible/addons/BaseStore';
 
 class CharacterStore extends BaseStore {
 
+    character: {
+        name: undefined,
+        race: undefined
+    }
+
     constructor(dispatcher) {
         super(dispatcher);
         this.characters = [];
@@ -10,6 +15,16 @@ class CharacterStore extends BaseStore {
     _receiveCharacters(characters) {
         this.characters = characters;
         this.emitChange();
+    }
+
+    _updateCharacter(payload) {
+        console.info('payload: %j', payload);
+        this.character = payload;
+        this.emitChange();
+    }
+
+    getCharacter() {
+        return this.character;
     }
 
     getAll() {
@@ -29,7 +44,8 @@ class CharacterStore extends BaseStore {
 
 CharacterStore.storeName = 'CharacterStore';
 CharacterStore.handlers = {
-    'RECEIVE_CHARACTERS_SUCCESS': '_receiveCharacters'
+    'RECEIVE_CHARACTERS_SUCCESS': '_receiveCharacters',
+    'UPDATE_RACE': '_updateCharacter'
 };
 
 export default CharacterStore;

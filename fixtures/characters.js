@@ -1,8 +1,9 @@
 import casual from 'casual';
 import races from './races';
 import classes from './classes';
+import genders from './genders';
 
-casual.define('gender', ()=> casual.random_element(['male', 'female']));
+casual.define('gender', ()=> casual.random_element(genders.map((gender) => gender.name)));
 casual.define('class', function() {
     return {
         name: casual.random_element(classes.map((c) => c.name )),
@@ -38,7 +39,7 @@ export default [
             complexion: 'caucasian',
             hair: 'blondie',
             eye: 'blue',
-            hand: 'right-handed'
+            handedness: 'right-handed'
         },
         alliegances: [
             'Cimeria',
@@ -53,6 +54,7 @@ export default [
             malus: 0
         },
         classes: [
+            casual.class,
             casual.class
         ]
     },
@@ -70,7 +72,7 @@ export default [
             complexion: 'caucasian',
             hair: 'blondie',
             eye: 'green',
-            hand: 'right-handed'
+            handedness: 'right-handed'
         },
         alliegances: [
             'Cimeria'
@@ -101,7 +103,7 @@ export default [
             complexion: 'caucasian',
             hair: 'brunette',
             eye: 'brown',
-            hand: 'right-handed'
+            handedness: 'right-handed'
         },
         alliegances: [
         ],
