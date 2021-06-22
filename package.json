@@ -28,7 +28,7 @@
     "material-ui": "0.10.1",
     "react": "^0.13.0",
     "react-tap-event-plugin": "^0.1.7",
-    "serialize-javascript": "^1.0.0",
+    "serialize-javascript": "^6.0.0",
     "serve-favicon": "2.3.0"
   },
   "devDependencies": {
