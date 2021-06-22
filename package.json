@@ -24,7 +24,7 @@
     "fluxible": "0.5.1",
     "fluxible-addons-react": "^0.1.6",
     "fluxible-plugin-fetchr": "^0.3.4",
-    "fluxible-router": "0.2.1",
+    "fluxible-router": "0.2.5",
     "material-ui": "0.10.1",
     "react": "^0.13.0",
     "react-tap-event-plugin": "^0.1.7",
