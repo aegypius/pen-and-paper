@@ -22,7 +22,7 @@
     "express": "^4.3.2",
     "express-state": "^2.0.0",
     "fluxible": "1.4.2",
-    "fluxible-addons-react": "^0.1.6",
+    "fluxible-addons-react": "^1.2.0",
     "fluxible-plugin-fetchr": "^0.3.4",
     "fluxible-router": "0.2.5",
     "material-ui": "0.10.1",
